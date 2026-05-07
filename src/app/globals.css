@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* BASE */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* DAY PICKER PREMIUM */
+
+.rdp {
+  --rdp-cell-size: 52px;
+  --rdp-accent-color: #ca8a04;
+  --rdp-background-color: #18181b;
+
+  margin: auto;
+  color: white;
+}
+
+.rdp-months {
+  display: flex;
+  justify-content: center;
+}
+
+.rdp-month {
+  background: rgba(24, 24, 27, 0.8);
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+}
+
+.rdp-caption_label {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.rdp-head_cell {
+  color: #888;
+  font-weight: 600;
+}
+
+.rdp-day {
+  border-radius: 14px;
+  transition: 0.2s;
+}
+
+.rdp-day:hover {
+  background: rgba(202, 138, 4, 0.2);
+}
+
+.rdp-day_selected {
+  background: #ca8a04 !important;
+  color: black !important;
+  font-weight: bold;
 }
