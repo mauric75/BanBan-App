@@ -1,3 +1,5 @@
+"use client"
+
 import BookingCalendar from "@/components/BookingCalendar";
 
 export default function Home() {
@@ -19,11 +21,11 @@ export default function Home() {
               Inicio
             </a>
 
-            <a href="#" className="hover:text-yellow-500 transition">
+            <a href="#servicios" className="hover:text-yellow-500 transition">
               Servicios
             </a>
 
-            <a href="#" className="hover:text-yellow-500 transition">
+            <a href="#reservas" className="hover:text-yellow-500 transition">
               Reservas
             </a>
 
@@ -61,7 +63,7 @@ export default function Home() {
         <div className="relative z-10 text-center px-6 max-w-4xl">
 
           <span className="uppercase tracking-[8px] text-yellow-500 text-sm">
-            Barbería Premium
+            BarberÃ­a Premium
           </span>
 
           <h1 className="text-7xl md:text-9xl font-black mt-6 leading-none">
@@ -72,18 +74,31 @@ export default function Home() {
             Reservas online, experiencia premium y estilo urbano moderno.
           </p>
 
+          {/* TAREA 1: BOTONES CON SCROLL SUAVE */}
           <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center">
 
-            <button className="px-10 py-5 rounded-full bg-yellow-600 hover:bg-yellow-500 transition-all text-black font-bold text-lg shadow-2xl shadow-yellow-600/20">
-
+            <button 
+              onClick={() => {
+                const element = document.getElementById("reservas");
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="px-10 py-5 rounded-full bg-yellow-600 hover:bg-yellow-500 transition-all text-black font-bold text-lg shadow-2xl shadow-yellow-600/20"
+            >
               Reservar Turno
-
             </button>
 
-            <button className="px-10 py-5 rounded-full border border-white/20 hover:bg-white/10 transition-all text-lg">
-
+            <button 
+              onClick={() => {
+                const element = document.getElementById("servicios");
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="px-10 py-5 rounded-full border border-white/20 hover:bg-white/10 transition-all text-lg"
+            >
               Ver Servicios
-
             </button>
 
           </div>
@@ -92,8 +107,8 @@ export default function Home() {
 
       </section>
 
-      {/* SERVICIOS */}
-      <section className="py-28 px-6 bg-[#0f0f14]">
+      {/* SERVICIOS - TAREA 1: AGREGUE ID */}
+      <section id="servicios" className="py-28 px-6 bg-[#0f0f14]">
 
         <div className="max-w-7xl mx-auto">
 
@@ -149,7 +164,7 @@ export default function Home() {
             <div className="bg-zinc-900/80 border border-white/5 rounded-[30px] p-10 hover:-translate-y-2 hover:border-yellow-500/30 transition-all duration-300 backdrop-blur-lg">
 
               <div className="text-5xl mb-6">
-                🔥
+                📅
               </div>
 
               <h3 className="text-3xl font-bold mb-4">
@@ -157,7 +172,7 @@ export default function Home() {
               </h3>
 
               <p className="text-zinc-400 leading-relaxed">
-                Atención exclusiva, ambiente urbano y experiencia barber premium.
+                AtenciÃ³n exclusiva, ambiente urbano y experiencia barber premium.
               </p>
 
             </div>
@@ -168,8 +183,8 @@ export default function Home() {
 
       </section>
 
-      {/* RESERVAS */}
-      <section className="py-28 px-6">
+      {/* RESERVAS - TAREA 1: AGREGUE ID */}
+      <section id="reservas" className="py-28 px-6">
 
         <div className="max-w-5xl mx-auto bg-zinc-900/70 border border-white/10 rounded-[40px] p-10 md:p-14 backdrop-blur-xl">
 

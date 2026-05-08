@@ -16,16 +16,48 @@ export default function BookingCalendar() {
   const [horasOcupadas, setHorasOcupadas] = useState<string[]>([]);
   const [cargandoHorarios, setCargandoHorarios] = useState(false);
 
-  const horarios = [
-    "10:00", "10:30", "11:00", "11:30", "12:00",
-    "13:00", "14:00", "15:00", "16:00", "17:00"
+  // TAREA 4: BARBEROS CON PLACEHOLDERS, BIO Y FRANJA HORARIA
+  const barberos = [
+    { 
+      nombre: "BARBERO_1", // TODO: Cambiar por nombre real (ej: "BanBan")
+      bio: "Tu minibio aquí.\nCuéntanos tus especialidades.\nDos o tres líneas.", // TODO: Reemplazar con biografía real
+      foto: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop", // TODO: Cambiar por foto real
+      franja: "mañana" // 10:00 a 13:00
+    },
+    { 
+      nombre: "BARBERO_2", // TODO: Cambiar por nombre real
+      bio: "Tu minibio aquí.\nCuéntanos tus especialidades.\nDos o tres líneas.", // TODO: Reemplazar con biografía real
+      foto: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop", // TODO: Cambiar por foto real
+      franja: "tarde" // 14:00 a 17:00
+    },
   ];
 
-  const barberos = [
-    { nombre: "Kevin", estilo: "Fade Expert", foto: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop" },
-    { nombre: "Lucas", estilo: "Beard Specialist", foto: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop" },
-    { nombre: "Franco", estilo: "Urban Style", foto: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop" },
+  // Todos los horarios disponibles
+  const horariosCompletos = [
+    "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00",
+    "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
   ];
+
+  // TAREA 4: Función para filtrar horarios según la franja del barbero
+  const obtenerHorariosPorBarbero = (nombreBarbero: string) => {
+    const barberoObj = barberos.find(b => b.nombre === nombreBarbero);
+    if (!barberoObj) return [];
+
+    if (barberoObj.franja === "mañana") {
+      return horariosCompletos.filter(h => {
+        const [horas, minutos] = h.split(":").map(Number);
+        const totalMinutos = horas * 60 + minutos;
+        return totalMinutos <= 13 * 60; // Hasta las 13:00
+      });
+    } else if (barberoObj.franja === "tarde") {
+      return horariosCompletos.filter(h => {
+        const [horas, minutos] = h.split(":").map(Number);
+        const totalMinutos = horas * 60 + minutos;
+        return totalMinutos >= 14 * 60; // Desde las 14:00
+      });
+    }
+    return [];
+  };
 
   // Cargar horas ocupadas para la fecha seleccionada
   async function cargarHorasOcupadas(fecha: Date) {
@@ -52,6 +84,11 @@ export default function BookingCalendar() {
       setHora("");
     }
   }, [selected]);
+
+  // Al cambiar el barbero, resetear hora (porque los horarios pueden ser diferentes)
+  useEffect(() => {
+    setHora("");
+  }, [barbero]);
 
   const estaOcupado = (horario: string) => horasOcupadas.includes(horario);
 
@@ -116,11 +153,14 @@ export default function BookingCalendar() {
       console.log("Teléfono: " + telefono.trim());
       console.log("===============================");
 
+      // TAREA 2: Mensaje WhatsApp claro - es una SOLICITUD, no una confirmación
       const mensaje = encodeURIComponent(
-        `Hola ${nombre.trim()}, gracias por reservar.\n\n📅 Fecha: ${selected.toLocaleDateString()}\n⏰ Hora: ${hora}\n✂️ Barbero: ${barbero}\n📞 Teléfono: ${telefono.trim()}`
+        `Hola, soy ${nombre.trim()}. Solicito una reserva para el ${selected.toLocaleDateString()} a las ${hora} con ${barbero}. Mi teléfono es ${telefono.trim()}. Quedo a la espera de su confirmación.`
       );
-      window.open(`https://wa.me/59898914088?text=${mensaje}`, "_blank");
-      alert("Reserva guardada correctamente.");
+
+      // TAREA 3: Cambiar window.open por window.location.href para compatibilidad con iOS
+      window.location.href = `https://wa.me/59898914088?text=${mensaje}`;
+      alert("Reserva guardada. Se abrirá WhatsApp para confirmar.");
 
       // Limpiar formulario
       setSelected(undefined);
@@ -136,6 +176,9 @@ export default function BookingCalendar() {
       setLoading(false);
     }
   }
+
+  // Obtener horarios según barbero seleccionado
+  const horariosDisponibles = barbero ? obtenerHorariosPorBarbero(barbero) : [];
 
   return (
     <div className="space-y-10">
@@ -157,11 +200,11 @@ export default function BookingCalendar() {
         </p>
       </div>
 
-      {/* BARBEROS */}
+      {/* BARBEROS - TAREA 4: MOSTRAR 2 BARBEROS CON BIO */}
       {selected && (
         <div className="bg-zinc-900/80 border border-white/10 rounded-[30px] p-8 backdrop-blur-xl">
           <h2 className="text-3xl font-black text-center mb-8">Elige tu barbero</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {barberos.map((b) => (
               <button
                 key={b.nombre}
@@ -173,7 +216,12 @@ export default function BookingCalendar() {
                 <img src={b.foto} alt={b.nombre} className="w-full h-72 object-cover" />
                 <div className="p-6 bg-black/60">
                   <h3 className="text-2xl font-bold">{b.nombre}</h3>
-                  <p className="text-zinc-400 mt-2">{b.estilo}</p>
+                  <p className="text-zinc-400 mt-3 text-sm leading-relaxed whitespace-pre-line">
+                    {b.bio}
+                  </p>
+                  <p className="text-yellow-500 text-xs mt-3 font-semibold">
+                    {b.franja === "mañana" ? "🌅 Turnos mañana" : "🌆 Turnos tarde"}
+                  </p>
                 </div>
               </button>
             ))}
@@ -204,7 +252,7 @@ export default function BookingCalendar() {
         </div>
       )}
 
-      {/* HORARIOS CON DISPONIBILIDAD */}
+      {/* HORARIOS CON DISPONIBILIDAD - TAREA 4: FILTRADOS POR BARBERO */}
       {selected && barbero && nombre && telefono && (
         <div className="bg-zinc-900/80 border border-white/10 rounded-[30px] p-8 backdrop-blur-xl">
           <h2 className="text-3xl font-black text-center mb-8">
@@ -212,7 +260,7 @@ export default function BookingCalendar() {
             {cargandoHorarios && <span className="text-sm ml-2 text-yellow-500">(actualizando...)</span>}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {horarios.map((h) => {
+            {horariosDisponibles.map((h) => {
               const ocupado = estaOcupado(h);
               const seleccionado = hora === h;
               return (
