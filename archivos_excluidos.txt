@@ -1,0 +1,5 @@
+﻿=== ARCHIVOS EXCLUIDOS (solo listado) ===
+Fecha: 05/08/2026 01:09:09
+Motivos: carpeta excluida (node_modules, .next, .git) | archivo .env | extensión no relevante
+
+src\app\favicon.ico - (extensión no relevante (.ico))

@@ -1,35 +1,42 @@
-"use client"
+"use client";
 
 import BookingCalendar from "@/components/BookingCalendar";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <main className="bg-black text-white overflow-hidden">
 
       {/* NAVBAR */}
-      <header className="fixed top-0 w-full z-50 bg-black/30 backdrop-blur-xl border-b border-white/10">
+      <header className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/5">
 
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
-          <h1 className="text-2xl font-black tracking-[6px]">
+          <h1 className="font-[family-name:var(--font-bebas)] text-3xl tracking-[0.3em]">
             BANBAN
           </h1>
 
-          <nav className="hidden md:flex gap-8 text-sm uppercase tracking-widest text-zinc-300">
+          <nav className="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] text-zinc-400">
 
-            <a href="#" className="hover:text-yellow-500 transition">
+            <a href="#" className="hover:text-[#C6A76A] transition-colors">
               Inicio
             </a>
 
-            <a href="#servicios" className="hover:text-yellow-500 transition">
+            <a
+              href="#servicios"
+              className="hover:text-[#C6A76A] transition-colors"
+            >
               Servicios
             </a>
 
-            <a href="#reservas" className="hover:text-yellow-500 transition">
+            <a
+              href="#reservas"
+              className="hover:text-[#C6A76A] transition-colors"
+            >
               Reservas
             </a>
 
-            <a href="#" className="hover:text-yellow-500 transition">
+            <a href="#" className="hover:text-[#C6A76A] transition-colors">
               Contacto
             </a>
 
@@ -40,7 +47,7 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden">
 
         {/* VIDEO */}
         <video
@@ -48,58 +55,102 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="absolute w-full h-full object-cover opacity-70 scale-105"
+          className="absolute w-full h-full object-cover scale-105 opacity-50"
           style={{
-            filter: "contrast(1.1) brightness(0.8)"
+            filter: "contrast(1.1) brightness(0.55)",
           }}
         >
           <source src="/barber.mp4" type="video/mp4" />
         </video>
 
         {/* OVERLAY */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/40" />
 
         {/* HERO CONTENT */}
-        <div className="relative z-10 text-center px-6 max-w-4xl">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
 
-          <span className="uppercase tracking-[8px] text-yellow-500 text-sm">
-            BarberÃ­a Premium
-          </span>
+          <div className="max-w-3xl">
 
-          <h1 className="text-7xl md:text-9xl font-black mt-6 leading-none">
-            BANBAN
-          </h1>
+            <span className="uppercase tracking-[0.5em] text-[#C6A76A] text-xs">
+              BARBERÍA PREMIUM
+            </span>
 
-          <p className="mt-8 text-zinc-300 text-lg md:text-xl leading-relaxed">
-            Reservas online, experiencia premium y estilo urbano moderno.
-          </p>
-
-          {/* TAREA 1: BOTONES CON SCROLL SUAVE */}
-          <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center">
-
-            <button 
-              onClick={() => {
-                const element = document.getElementById("reservas");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="px-10 py-5 rounded-full bg-yellow-600 hover:bg-yellow-500 transition-all text-black font-bold text-lg shadow-2xl shadow-yellow-600/20"
+            <h1
+              className="
+                font-[family-name:var(--font-bebas)]
+                text-7xl
+                md:text-[11rem]
+                leading-[0.9]
+                tracking-[0.08em]
+                mt-6
+              "
             >
-              Reservar Turno
-            </button>
+              BANBAN
+            </h1>
 
-            <button 
-              onClick={() => {
-                const element = document.getElementById("servicios");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-              className="px-10 py-5 rounded-full border border-white/20 hover:bg-white/10 transition-all text-lg"
+            <p
+              className="
+                mt-8
+                text-zinc-400
+                text-lg
+                md:text-xl
+                leading-relaxed
+                max-w-xl
+              "
             >
-              Ver Servicios
-            </button>
+              Cortes modernos, precisión y experiencia premium.
+              Reservá online en segundos.
+            </p>
+
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
+
+              <button
+                onClick={() => {
+                  const element = document.getElementById("reservas");
+
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="
+                  px-10
+                  py-4
+                  rounded-full
+                  bg-[#C6A76A]
+                  hover:scale-[1.03]
+                  transition-all
+                  duration-300
+                  text-black
+                  font-semibold
+                "
+              >
+                Reservar turno
+              </button>
+
+              <button
+                onClick={() => {
+                  const element = document.getElementById("servicios");
+
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="
+                  px-10
+                  py-4
+                  rounded-full
+                  border
+                  border-[#262626]
+                  bg-[#181818]
+                  hover:bg-[#202020]
+                  transition-all
+                  duration-300
+                "
+              >
+                Ver servicios
+              </button>
+
+            </div>
 
           </div>
 
@@ -107,19 +158,26 @@ export default function Home() {
 
       </section>
 
-      {/* SERVICIOS - TAREA 1: AGREGUE ID */}
-      <section id="servicios" className="py-28 px-6 bg-[#0f0f14]">
+      {/* SERVICIOS */}
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        id="servicios"
+        className="py-28 px-6 bg-[#0D0D0D]"
+      >
 
         <div className="max-w-7xl mx-auto">
 
           <div className="text-center mb-20">
 
-            <span className="uppercase tracking-[6px] text-yellow-500 text-sm">
-              Experiencia Premium
+            <span className="uppercase tracking-[0.4em] text-[#C6A76A] text-xs">
+              EXPERIENCIA PREMIUM
             </span>
 
-            <h2 className="text-5xl md:text-6xl font-black mt-6">
-              Servicios
+            <h2 className="font-[family-name:var(--font-bebas)] text-6xl tracking-[0.08em] mt-6">
+              SERVICIOS
             </h2>
 
           </div>
@@ -127,52 +185,85 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
 
             {/* CARD */}
-            <div className="bg-zinc-900/80 border border-white/5 rounded-[30px] p-10 hover:-translate-y-2 hover:border-yellow-500/30 transition-all duration-300 backdrop-blur-lg">
+            <div className="
+              bg-[#151515]
+              border
+              border-[#262626]
+              rounded-3xl
+              p-10
+              transition-all
+              duration-300
+              hover:border-[#C6A76A]/40
+              hover:-translate-y-1
+            ">
 
               <div className="text-5xl mb-6">
                 ✂️
               </div>
 
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-3xl font-semibold mb-4">
                 Corte Premium
               </h3>
 
               <p className="text-zinc-400 leading-relaxed">
-                Fade, taper, freestyle y asesoramiento personalizado para un estilo moderno.
+                Fade, taper, freestyle y asesoramiento personalizado
+                para un estilo moderno.
               </p>
 
             </div>
 
             {/* CARD */}
-            <div className="bg-zinc-900/80 border border-white/5 rounded-[30px] p-10 hover:-translate-y-2 hover:border-yellow-500/30 transition-all duration-300 backdrop-blur-lg">
+            <div className="
+              bg-[#151515]
+              border
+              border-[#262626]
+              rounded-3xl
+              p-10
+              transition-all
+              duration-300
+              hover:border-[#C6A76A]/40
+              hover:-translate-y-1
+            ">
 
               <div className="text-5xl mb-6">
                 🧔
               </div>
 
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-3xl font-semibold mb-4">
                 Barba Elite
               </h3>
 
               <p className="text-zinc-400 leading-relaxed">
-                Perfilado premium, toallas calientes y tratamiento profesional.
+                Perfilado premium, toallas calientes
+                y tratamiento profesional.
               </p>
 
             </div>
 
             {/* CARD */}
-            <div className="bg-zinc-900/80 border border-white/5 rounded-[30px] p-10 hover:-translate-y-2 hover:border-yellow-500/30 transition-all duration-300 backdrop-blur-lg">
+            <div className="
+              bg-[#151515]
+              border
+              border-[#262626]
+              rounded-3xl
+              p-10
+              transition-all
+              duration-300
+              hover:border-[#C6A76A]/40
+              hover:-translate-y-1
+            ">
 
               <div className="text-5xl mb-6">
                 📅
               </div>
 
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-3xl font-semibold mb-4">
                 Experiencia VIP
               </h3>
 
               <p className="text-zinc-400 leading-relaxed">
-                AtenciÃ³n exclusiva, ambiente urbano y experiencia barber premium.
+                Atención exclusiva, ambiente urbano
+                y experiencia barber premium.
               </p>
 
             </div>
@@ -181,21 +272,37 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </motion.section>
 
-      {/* RESERVAS - TAREA 1: AGREGUE ID */}
-      <section id="reservas" className="py-28 px-6">
+      {/* RESERVAS */}
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        id="reservas"
+        className="py-28 px-6"
+      >
 
-        <div className="max-w-5xl mx-auto bg-zinc-900/70 border border-white/10 rounded-[40px] p-10 md:p-14 backdrop-blur-xl">
+        <div className="
+          max-w-4xl
+          mx-auto
+          bg-[#101010]
+          border
+          border-[#1F1F1F]
+          rounded-[40px]
+          p-6
+          md:p-14
+        ">
 
           <div className="text-center mb-12">
 
-            <span className="uppercase tracking-[6px] text-yellow-500 text-sm">
-              Reserva Online
+            <span className="uppercase tracking-[0.4em] text-[#C6A76A] text-xs">
+              RESERVA ONLINE
             </span>
 
-            <h2 className="text-5xl font-black mt-6">
-              Agenda tu turno
+            <h2 className="font-[family-name:var(--font-bebas)] text-6xl tracking-[0.08em] mt-6">
+              AGENDA TU TURNO
             </h2>
 
           </div>
@@ -209,7 +316,7 @@ export default function Home() {
 
         </div>
 
-      </section>
+      </motion.section>
 
     </main>
   );
