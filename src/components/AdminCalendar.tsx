@@ -34,8 +34,8 @@ export default function AdminCalendar({
     const [year, monthStr, dayStr] = reserva.fecha.split("-");
     const day = parseInt(dayStr);
     if (
-      parseInt(year) === year &&
-      parseInt(monthStr) === month + 1
+      parseInt(year) === selectedMonth.getFullYear() &&
+      parseInt(monthStr) === selectedMonth.getMonth() + 1
     ) {
       if (!reservasPorDia.has(day)) {
         reservasPorDia.set(day, []);
