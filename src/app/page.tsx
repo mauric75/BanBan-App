@@ -317,7 +317,14 @@ export default function Home() {
         </div>
 
       </motion.section>
-
+	    {/* FOOTER DISCRETO CON LINK ADMIN */}
+      <footer className="py-8 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto text-right text-[10px] text-zinc-600">
+          <a href="/admin" className="hover:text-yellow-500 transition-colors">
+            [admin]
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
