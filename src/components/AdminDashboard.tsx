@@ -123,20 +123,22 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* HEADER */}
-      <header className="fixed top-0 w-full z-40 bg-black/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          <h1 className="text-2xl font-black tracking-[0.2em]">
-            BANBAN ADMIN
-          </h1>
-          <button
-            onClick={onLogout}
-            className="px-6 py-2 text-sm uppercase tracking-[0.1em] border border-white/20 hover:bg-white/5 rounded-lg transition-all"
-          >
-            Salir
-          </button>
-        </div>
-      </header>
+<header className="fixed top-0 w-full z-40 bg-black/80 backdrop-blur-xl border-b border-white/10">
+  <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <a href="/" className="px-6 py-2 text-sm uppercase tracking-[0.1em] border border-white/20 hover:bg-white/5 rounded-lg transition-all">
+      Volver
+    </a>
+    <h1 className="text-2xl font-black tracking-[0.2em]">
+      BANBAN ADMIN
+    </h1>
+    <button
+      onClick={onLogout}
+      className="px-6 py-2 text-sm uppercase tracking-[0.1em] border border-white/20 hover:bg-white/5 rounded-lg transition-all"
+    >
+      Salir
+    </button>
+  </div>
+</header>
 
       {/* MAIN CONTENT */}
       <div className="pt-20 pb-10 px-6">
